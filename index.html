@@ -14,6 +14,7 @@
         /* Apply Inter font */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6; /* A very light teal/gray for the body */
         }
         /* Custom styles for Chart.js tooltips */
         .chartjs-tooltip {
@@ -40,13 +41,13 @@
         }
     </script>
 </head>
-<body class="bg-ave-teal-dark">
+<body class="bg-gray-100">
 
     <!-- Header -->
-    <div class="bg-ave-teal-dark shadow-sm mb-6">
+    <div class="bg-white shadow-sm mb-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-            <h1 class="text-3xl font-bold text-white">Added Value Enterprises</h1>
-            <p class="text-ave-teal-light text-lg">September 2025 Board Report Dashboard</p>
+            <h1 class="text-3xl font-bold text-ave-teal-dark">Added Value Enterprises</h1>
+            <p class="text-ave-teal text-lg">September 2025 Board Report Dashboard</p>
         </div>
     </div>
 
@@ -89,7 +90,7 @@
 
             <!-- Card: Commercial Performance (Main) -->
             <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-ave-orange">Commercial Performance</h3>
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Commercial Performance</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -134,8 +135,8 @@
             </div>
 
             <!-- Card: Business Development -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-ave-orange">Business Development</h3>
+            <div class="bg-white p-6 rounded-lg shadow-lg h-full">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Business Development</h3>
                 <ul class="space-y-3">
                     <li class="flex justify-between items-center py-2 border-b">
                         <span class="text-gray-600">Pipeline Value</span>
@@ -160,19 +161,87 @@
                 </ul>
             </div>
 
-            <!-- Card: Client Order Split (Chart) - This was a duplicate block from our swap. I am removing it.
-            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg" style="display: none;">
-                <h3 class="text-xl font-semibold mb-2 text-ave-orange">Client Order Split (Sept)</h3>
-                <p class="text-sm text-gray-500 mb-4">Note: Shows percentage of total orders for clients listed in report.</p>
+            <!-- Card: Pipeline Sector Focus (Chart) -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2 text-ave-teal-dark">Pipeline Sector Focus</h3>
+                <p class="text-sm text-gray-500 mb-4">(% of Pipeline Value)</p>
                 <div class="w-full h-64">
-                    <canvas id="clientOrderChart_old"></canvas>
+                    <canvas id="pipelineChart"></canvas>
                 </div>
             </div>
-            -->
+
+            <!-- Card: Income by Sector (Chart) -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2 text-ave-teal-dark">Income by Sector</h3>
+                <p class="text-sm text-gray-500 mb-4">(Average Income %)</p>
+                <div class="w-full h-64">
+                    <canvas id="incomeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Card: Client Order Split (Chart) -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2 text-ave-teal-dark">Client Order Split (Sept)</h3>
+                <p class="text-sm text-gray-500 mb-4">Note: Shows percentage of total orders for clients listed in report.</p>
+                <div class="w-full h-64">
+                    <canvas id="clientOrderChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Card: Client SLA Compliance (The "Ticketing Box") -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg h-full">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Client Ticketing SLA (3-Day)</h3>
+                <ul class="space-y-4">
+                    <!-- Aspens Services Ltd -->
+                    <li class="border-b pb-3">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium text-gray-700">Aspens Services Ltd</span>
+                            <span class="font-bold text-green-600">97.26%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 97.26%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">782 of 804 Tickets</span>
+                    </li>
+                    <!-- Miquill Catering Ltd -->
+                    <li class="border-b pb-3">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium text-gray-700">Miquill Catering Ltd</span>
+                            <span class="font-bold text-yellow-500">94.55%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 94.55%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">52 of 55 Tickets</span>
+                    </li>
+                    <!-- Stir Food Ltd -->
+                    <li class="border-b pb-3">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium text-gray-700">Stir Food Ltd</span>
+                            <span class="font-bold text-yellow-500">94.23%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 94.23%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">50 of 53 Tickets</span>
+                    </li>
+                     <!-- Palmer & Howells Ltd -->
+                    <li>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium text-gray-700">Palmer & Howells Ltd</span>
+                            <span class="font-bold text-green-600">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">27 of 27 Tickets</span>
+                    </li>
+                </ul>
+            </div>
 
             <!-- Card: Food & Nutrition -->
             <div class="bg-white p-6 rounded-lg shadow-lg h-full">
-                <h3 class="text-xl font-semibold mb-4 text-ave-orange">Bespoke Menu Performance</h3>
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Bespoke Menu Performance</h3>
                 <ul class="space-y-3">
                     <li class="flex justify-between items-center py-2 border-b">
                         <span class="text-gray-600">SLA (% within 10 Days)</span>
@@ -328,8 +397,4 @@
 
 </body>
 </html>
-
-
-
-
 

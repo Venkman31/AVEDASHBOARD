@@ -3,331 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVE Board Report Dashboard</title>
+    <title>AVE Dashboard - Sept 2025</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Add custom Tailwind configuration -->
-    <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                'ave-teal': '#007B80',
-                'ave-orange': '#F7A721',
-                'ave-dark-grey': '#4A4A4A',
-              }
-            }
-          }
-        }
-      </script>
+    <!-- Load Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Load Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Apply Inter font */
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom styles for charts to closely match the image */
-        .chart-legend-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.875rem; /* text-sm */
-            color: #4b5563; /* text-gray-600 */
-        }
-        .chart-legend-dot {
-            width: 0.75rem; /* w-3 */
-            height: 0.75rem; /* h-3 */
-            border-radius: 9999px; /* rounded-full */
-            margin-right: 0.5rem; /* mr-2 */
+        /* Custom styles for Chart.js tooltips */
+        .chartjs-tooltip {
+            font-family: 'Inter', sans-serif;
         }
     </style>
+    <script>
+        // Set Tailwind theme colors to match AVE branding
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ave-teal': {
+                            DEFAULT: '#0d9488', // teal-600
+                            light: '#99f6e4',   // teal-200
+                            dark: '#115e59'    // teal-800
+                        },
+                        'ave-orange': {
+                            DEFAULT: '#f97316' // orange-500
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-ave-teal">
+<body class="bg-ave-teal-dark">
 
-    <div class="container mx-auto p-4 md:p-8">
-        
-        <!-- Header Section -->
-        <header class="flex justify-between items-center mb-8">
-            <div>
-                <h1 class="text-4xl font-extrabold text-ave-orange">AVE</h1>
-                <p class="text-sm font-light tracking-widest text-ave-dark-grey">ADDED VALUE ENTERPRISES</p>
+    <!-- Header -->
+    <div class="bg-ave-teal-dark shadow-sm mb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <h1 class="text-3xl font-bold text-white">Added Value Enterprises</h1>
+            <p class="text-ave-teal-light text-lg">September 2025 Board Report Dashboard</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+
+        <!-- Top KPI Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <!-- KPI Card: YTD PBIT -->
+            <div class="bg-white p-6 rounded-lg shadow-lg transition-all hover:shadow-xl">
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">YTD Net Profit (PBIT)</h3>
+                <p class="text-4xl font-bold text-ave-teal-dark mt-2">£568,000</p>
             </div>
-            <div class="text-right">
-                <h2 class="text-xl font-bold text-ave-orange">Board Report Dashboard</h2>
-                <p class="text-lg font-light text-ave-orange">September 2025</p>
+            
+            <!-- KPI Card: PBIT vs Forecast -->
+            <div class="bg-white p-6 rounded-lg shadow-lg transition-all hover:shadow-xl">
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">PBIT vs. Forecast (YTD)</h3>
+                <p class="text-4xl font-bold text-green-600 mt-2">+£17,000</p>
+                <span class="text-sm text-green-600">Beating forecast</span>
             </div>
-        </header>
+
+            <!-- KPI Card: Procurement Mitigation -->
+            <div class="bg-white p-6 rounded-lg shadow-lg transition-all hover:shadow-xl">
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Procurement Price Mitigation</h3>
+                <p class="text-4xl font-bold text-ave-orange mt-2">£188,000</p>
+                <span class="text-sm text-gray-600">Value mitigated in Sept</span>
+            </div>
+            
+            <!-- KPI Card: Pipeline Value -->
+            <div class="bg-white p-6 rounded-lg shadow-lg transition-all hover:shadow-xl">
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Pipeline Value</h3>
+                <p class="text-4xl font-bold text-ave-teal-dark mt-2">£19 Million</p>
+                <span class="text-sm text-gray-600">from 83 opportunities</span>
+            </div>
+        </div>
+        <!-- End Top KPI Row -->
 
         <!-- Main Dashboard Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            <!-- Card 1: Commercial Performance (Full Width) -->
-            <div class="lg:col-span-3 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Commercial Performance (September)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- KPI 1: Revenue -->
-                    <div class="p-4 rounded-lg bg-gray-50">
-                        <p class="text-sm text-gray-500 mb-1">Revenue (Actual)</p>
-                        <p class="text-4xl font-extrabold text-gray-900">£199k</p>
-                        <p class="text-sm font-medium text-red-600">-£30k vs Forecast (£229k)</p>
-                    </div>
-                    <!-- KPI 2: Net Profit (PBIT) -->
-                    <div class="p-4 rounded-lg bg-gray-50">
-                        <p class="text-sm text-gray-500 mb-1">Net Profit (PBIT)</p>
-                        <p class="text-4xl font-extrabold text-gray-900">£109k</p>
-                        <p class="text-sm font-medium text-red-600">-£7k vs Forecast (£116k)</p>
-                    </div>
-                    <!-- KPI 3: Overheads -->
-                    <div class="p-4 rounded-lg bg-gray-50">
-                        <p class="text-sm text-gray-500 mb-1">Overheads</p>
-                        <p class="text-4xl font-extrabold text-gray-900">-£13k</p>
-                        <p class="text-sm font-medium text-green-600">£24k Better vs Forecast (£11k)</p>
-                    </div>
-                    <!-- KPI 4: Year-End P&T (Highlighted) -->
-                    <div class="p-4 rounded-lg bg-ave-teal text-white flex flex-col justify-center">
-                        <p class="text-sm text-white/75 mb-1">Year-End P&T (Actual)</p>
-                        <p class="text-4xl font-extrabold">£568k</p>
-                        <p class="text-sm font-medium text-white/90">£17k Above Q3 Forecast</p>
-                    </div>
+            <!-- Card: Commercial Performance (Main) -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Commercial Performance</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Metric</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">September</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Forecast (Sep)</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Variance (Sep)</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">YTD</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Variance (YTD)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap font-medium text-gray-900">Revenue</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">£199k</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">£229k</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-semibold text-red-600">-£30k</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">£2.22m</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-semibold text-red-600">-£30k</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 whitespace-nowrap font-medium text-gray-900">Overheads</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">-£13k</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">£11k</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-semibold text-green-600">+£24k*</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-gray-700">£1.64m</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-semibold text-green-600">+£47k*</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-4 py-4 whitespace-nowrap font-bold text-gray-900">Net Profit (PBIT)</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-bold text-gray-900">£109k</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-bold text-gray-900">£116k</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-bold text-red-600">-£7k</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-bold text-gray-900">£568k</td>
+                                <td class="px-4 py-4 whitespace-nowrap font-bold text-green-600">+£17k</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-500 mt-3">*Positive overhead variance indicates an underspend (favourable).</p>
+            </div>
+
+            <!-- Card: Business Development -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Business Development</h3>
+                <ul class="space-y-3">
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Pipeline Value</span>
+                        <span class="font-bold text-ave-teal text-lg">£19M (83 Opps)</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Total Income Opportunity</span>
+                        <span class="font-bold text-gray-800 text-lg">£1.18M</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Probable Income (@20%)</span>
+                        <span class="font-bold text-gray-800 text-lg">£236k</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Avg. Income per Opp.</span>
+                        <span class="font-bold text-gray-800 text-lg">£14.2k</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2">
+                        <span class="text-gray-600">Quotes Converted YTD</span>
+                        <span class="font-bold text-gray-800 text-lg">21 (£102.5k)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card: Pipeline by Sector (Chart) -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Pipeline by Sector (% Value)</h3>
+                <div class="w-full h-64 mx-auto">
+                    <canvas id="pipelineChart"></canvas>
                 </div>
             </div>
 
-            <!-- Card 2 & 8 Wrapper -->
-            <div class="lg:col-span-2 flex flex-col gap-6">
-
-                <!-- Card 2: Performance vs. Forecast (2/3 Width) -->
-                <div class="bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                    <h3 class="text-ave-orange text-lg font-bold mb-4">Performance vs. Forecast</h3>
-                    <div class="flex justify-between items-end h-28 px-4 pt-2 relative">
-                        <!-- Y-Axis Labels (Simplified) -->
-                        <div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-gray-400 py-2" style="margin-bottom: 2.75rem;">
-                            <span>200k</span>
-                            <span>100k</span>
-                            <span>0k</span>
-                        </div>
-                        <!-- Chart Bars -->
-                        <div class="flex justify-around items-end h-full w-full pl-8 border-b border-l border-gray-300">
-                        <!-- Group 1: Revenue -->
-                        <div class="flex items-end mx-2" style="height: 100%;">
-                            <div class="w-10 bg-ave-teal" style="height: 86.9%;" title="Actual: £199k"></div> <!-- 199/229 (max) -> ~87% -->
-                            <div class="w-10 bg-gray-300 ml-1" style="height: 100%;" title="Forecast: £229k"></div>
-                        </div>
-                        <!-- Group 2: Net Profit (PBIT) -->
-                        <div class="flex items-end mx-2" style="height: 100%;">
-                            <div class="w-10 bg-ave-teal" style="height: 47.6%;" title="Actual: £109k"></div> <!-- 109/229 -> ~47.6% -->
-                            <div class="w-10 bg-gray-300 ml-1" style="height: 50.6%;" title="Forecast: £116k"></div> <!-- 116/229 -> ~50.6% -->
-                        </div>
-                        <!-- Group 3: Overheads (Note: Visual shows Actual > Forecast, data is -13k vs 11k) -->
-                        <!-- Replicating visual, not data for this bar -->
-                        <div class="flex items-end mx-2" style="height: 100%;">
-                            <div class="w-10 bg-ave-teal" style="height: 5.6%;" title="Actual: -£13k"></div> <!-- 13/229 -> ~5.6% -->
-                            <div class="w-10 bg-gray-300 ml-1" style="height: 4.8%;" title="Forecast: £11k"></div> <!-- 11/229 -> ~4.8% -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 8: Food & Nutrition (Full Width) -->
-                <div class="bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                    <h3 class="text-ave-orange text-lg font-bold mb-4">Food & Nutrition (Autumn/Winter Cycle)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <!-- Pod 1 -->
-                        <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
-                            <p class="text-5xl font-extrabold">169</p>
-                            <p class="text-sm font-medium">Total Requests</p>
-                        </div>
-                        <!-- Pod 2 -->
-                        <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
-                            <p class="text-5xl font-extrabold">46</p>
-                            <p class="text-sm font-medium">Completed</p>
-                        </div>
-                        <!-- Pod 3 -->
-                        <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
-                            <p class="text-5xl font-extrabold">90%</p>
-                            <p class="text-sm font-medium">Within 10 Days</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-500 italic mt-4">
-                        Bespoke menu requests now in Halo CRM. Increased data accuracy expected soon.
-                    </p>
-                </div>
-
-            </div> <!-- End Card 2 & 8 Wrapper -->
-
-            <!-- Card 3: Business Development (1/3 Width) -->
-            <div class="lg:col-span-1 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Business Development</h3>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-sm text-gray-500">Pipeline Value</p>
-                        <p class="text-3xl font-extrabold text-gray-900">£19m</p>
-                        <p class="text-xs text-gray-400">83 opportunities</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500">Total Income Opportunity</p>
-                        <p class="text-3xl font-extrabold text-gray-900">£1.18m</p>
-                        <p class="text-xs text-gray-400">£236k @ 20% prob.</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500">Avg. Income / Opp.</p>
-                        <p class="text-3xl font-extrabold text-gray-900">£14.2k</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500">Quotes Converted YTD</p>
-                        <p class="text-3xl font-extrabold text-gray-900">21</p>
-                        <p class="text-xs text-gray-400">£102.5k Value</p>
-                    </div>
+            <!-- Card: Income by Sector (Chart) -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Avg. Income by Sector</h3>
+                <div class="w-full h-64 mx-auto">
+                    <canvas id="incomeChart"></canvas>
                 </div>
             </div>
 
-            <!-- Card 4: Pipeline by Sector (1/3 Width) -->
-            <div class="lg:col-span-1 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Pipeline by Sector</h3>
-                <div class="flex justify-center items-center my-4">
-                    <!-- Donut Chart -->
-                    <div class="w-40 h-40 rounded-full relative" 
-                         style="background-image: conic-gradient(
-                            from 0deg, 
-                            #007B80 0% 49%, 
-                            #F7A721 49% 92%, 
-                            #6b7280 92% 100%
-                         );">
-                         <!-- Inner Hole -->
-                        <div class="absolute w-28 h-28 bg-white rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    </div>
-                </div>
-                <!-- Legend -->
-                <div class="space-y-2">
-                    <div class="chart-legend-item">
-                        <div class="chart-legend-dot bg-ave-teal"></div>
-                        <span>Hospitality</span>
-                        <span class="ml-auto font-bold">49%</span>
-                    </div>
-                    <div class="chart-legend-item">
-                        <div class="chart-legend-dot bg-ave-orange"></div>
-                        <span>Healthcare</span>
-                        <span class="ml-auto font-bold">43%</span>
-                    </div>
-                    <div class="chart-legend-item">
-                        <div class="chart-legend-dot bg-gray-500"></div>
-                        <span>Education</span>
-                        <span class="ml-auto font-bold">8%</span>
-                    </div>
-                </div>
+            <!-- Card: Client SLA Compliance -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Client Ticketing SLA (3-Day)</h3>
+                <ul class="space-y-4">
+                    <li>
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold text-gray-700">Palmer & Howells Ltd</span>
+                            <span class="font-bold text-green-600">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="text-xs text-gray-500">27 of 27 Tickets</span>
+                    </li>
+                    <li>
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold text-gray-700">Aspens Services Ltd</span>
+                            <span class="font-bold text-green-600">97.26%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 97.26%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">782 of 804 Tickets</span>
+                    </li>
+                    <li>
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold text-gray-700">Miquill Catering Ltd</span>
+                            <span class="font-bold text-yellow-500">94.55%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 94.55%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">52 of 55 Tickets</span>
+                    </li>
+                    <li>
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold text-gray-700">Stir Food Ltd</span>
+                            <span class="font-bold text-yellow-500">94.23%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 94.23%"></div>
+                        </div>
+                         <span class="text-xs text-gray-500">50 of 53 Tickets</span>
+                    </li>
+                </ul>
             </div>
-            
-            <!-- Card 5: Avg. Income by Sector (1/3 Width) -->
-            <div class="lg:col-span-1 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Avg. Income by Sector</h3>
-                <div class="space-y-3 pt-4">
-                    <div class="flex justify-between items-center text-gray-600">
-                        <span class="text-base">Hospitality</span>
-                        <span class="text-2xl font-bold text-gray-900">47%</span>
-                    </div>
-                    <hr>
-                    <div class="flex justify-between items-center text-gray-600">
-                        <span class="text-base">Healthcare</span>
-                        <span class="text-2xl font-bold text-gray-900">35%</span>
-                    </div>
-                    <hr>
-                    <div class="flex justify-between items-center text-gray-600">
-                        <span class="text-base">Education</span>
-                        <span class="text-2xl font-bold text-gray-900">18%</span>
-                    </div>
+
+            <!-- Card: Client Order Split (Chart) -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2 text-ave-teal-dark">Client Order Split (Sept)</h3>
+                <p class="text-sm text-gray-500 mb-4">Note: Shows percentage of total orders for clients listed in report.</p>
+                <div class="w-full h-64">
+                    <canvas id="clientOrderChart"></canvas>
                 </div>
             </div>
 
-            <!-- Card 6: Procurement & Top Clients (2/3 Width) -->
-            <div class="lg:col-span-1 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <!-- Procurement Section -->
-                <div>
-                    <h3 class="text-ave-orange text-lg font-bold mb-4">Procurement: Price Review (Sep)</h3>
-                    <p class="text-sm text-gray-500">Total Value Mitigated</p>
-                    <p class="text-5xl font-extrabold text-gray-900 mb-3">£188k</p>
-                    <div class="flex justify-between text-sm">
-                        <span class="font-medium text-red-600">Original Impact: +£207k</span>
-                        <span class="font-medium text-green-600">Final Accepted: +£18.5k</span>
-                    </div>
-                </div>
-                <hr class="my-6">
-                <!-- Top Clients Section -->
-                <div>
-                    <h3 class="text-ave-orange text-lg font-bold mb-4">Top Clients (% of Total Orders)</h3>
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Stir Food</span>
-                            <span class="font-bold text-gray-900">9.16%</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Palmer & Howells</span>
-                            <span class="font-bold text-gray-900">8.16%</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Miquill Catering</span>
-                            <span class="font-bold text-gray-900">6.03%</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Aspen Services</span>
-                            <span class="font-bold text-gray-900">2.70%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Card 7: Operations SLA (1/3 Width) -->
-            <div class="lg:col-span-1 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Operations: Client SLA Compliance (3-Day)</h3>
-                <div class="space-y-4 pt-2">
-                    <!-- Palmer & Howells -->
-                    <div>
-                        <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
-                            <span>Palmer & Howells Ltd</span>
-                            <span>100%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <!-- Blue bar as in visual -->
-                            <div class="bg-ave-orange h-4 rounded-full" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <!-- Aspens Services Ltd -->
-                    <div>
-                        <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
-                            <span>Aspens Services Ltd</span>
-                            <span>97.26%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div class="bg-ave-orange h-4 rounded-full" style="width: 97.26%"></div>
-                        </div>
-                    </div>
-                    <!-- Miquill Catering Ltd -->
-                    <div>
-                        <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
-                            <span>Miquill Catering Ltd</span>
-                            <span>94.55%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div class="bg-ave-orange h-4 rounded-full" style="width: 94.55%"></div>
-                        </div>
-                    </div>
-                    <!-- Stir Food Ltd -->
-                    <div>
-                        <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
-                            <span>Stir Food Ltd</span>
-                            <span>94.23%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div class="bg-ave-teal h-4 rounded-full" style="width: 94.23%"></div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Card: Food & Nutrition -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-ave-teal-dark">Bespoke Menu Performance</h3>
+                <ul class="space-y-3">
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">SLA (% within 10 Days)</span>
+                        <span class="font-bold text-green-600 text-lg">90%</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Avg. Turnaround</span>
+                        <span class="font-bold text-gray-800 text-lg">7 Days</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Completed Menus</span>
+                        <span class="font-bold text-gray-800 text-lg">46</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-600">Validated Requests</span>
+                        <span class="font-bold text-gray-800 text-lg">51</span>
+                    </li>
+                    <li class="flex justify-between items-center py-2">
+                        <span class="text-gray-600">Total Requests</span>
+                        <span class="font-bold text-gray-800 text-lg">169</span>
+                    </li>
+                </ul>
             </div>
 
-            <!-- Card 8: Food & Nutrition (Full Width) -->
-            
-        </div> <!-- End of Grid -->
+        </div>
+        <!-- End Main Dashboard Grid -->
 
-    </div> <!-- End of Container -->
+    </div>
+
+    <!-- Chart.js Initialization -->
+    <script>
+        window.onload = function() {
+            const chartColors = {
+                teal: '#0d9488',
+                orange: '#f97316',
+                lightTeal: '#99f6e4',
+                gray: '#6b7280'
+            };
+
+            // --- Pipeline Chart ---
+            const pipelineCtx = document.getElementById('pipelineChart');
+            if (pipelineCtx) {
+                new Chart(pipelineCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Hospitality', 'Healthcare', 'Education'],
+                        datasets: [{
+                            data: [49, 43, 8],
+                            backgroundColor: [chartColors.teal, chartColors.orange, chartColors.lightTeal],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: { font: { family: "'Inter', sans-serif", size: 12 } }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Income Chart ---
+            const incomeCtx = document.getElementById('incomeChart');
+            if (incomeCtx) {
+                new Chart(incomeCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Hospitality', 'Healthcare', 'Education'],
+                        datasets: [{
+                            data: [47, 35, 18],
+                            backgroundColor: [chartColors.teal, chartColors.orange, chartColors.lightTeal],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: { font: { family: "'Inter', sans-serif", size: 12 } }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Client Order Chart ---
+            const clientOrderCtx = document.getElementById('clientOrderChart');
+            if (clientOrderCtx) {
+                new Chart(clientOrderCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Stir Food', 'Palmer & Howells', 'Miquill Catering', 'Aspen Services'],
+                        datasets: [{
+                            label: '% of Total Orders',
+                            data: [9.16, 8.16, 6.03, 2.70],
+                            backgroundColor: chartColors.teal,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y', // Make it a horizontal bar chart
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 12, // Give it some breathing room
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        };
+    </script>
 
 </body>
 </html>
-
-
 

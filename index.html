@@ -14,11 +14,24 @@
         /* Apply Inter font */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f7f6; /* A very light teal/gray for the body */
+            background-color: #f3f4f6; /* gray-100 */
         }
         /* Custom styles for Chart.js tooltips */
         .chartjs-tooltip {
             font-family: 'Inter', sans-serif;
+        }
+        /* Hide elements when printing */
+        @media print {
+            .print-hidden {
+                display: none;
+            }
+            body {
+                background-color: #ffffff;
+            }
+            .bg-white {
+                box-shadow: none;
+                border: 1px solid #e5e7eb;
+            }
         }
     </style>
     <script>
@@ -44,10 +57,28 @@
 <body class="bg-gray-100">
 
     <!-- Header -->
-    <div class="bg-white shadow-sm mb-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-            <h1 class="text-3xl font-bold text-ave-teal-dark">Added Value Enterprises</h1>
-            <p class="text-ave-teal text-lg">September 2025 Board Report Dashboard</p>
+    <div class="bg-white shadow-sm mb-6 print-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center">
+            
+            <!-- Left Spacer -->
+            <div class="w-1/4">
+                <!-- Intentionally blank to allow for centering -->
+            </div>
+
+            <!-- Centered Header Text -->
+            <div class="w-1/2 text-center">
+                <h1 class="text-3xl font-bold text-ave-teal-dark">Added Value Enterprises</h1>
+                <p class="text-ave-teal text-lg">September 2025 Board Report Dashboard</p>
+            </div>
+
+            <!-- Download Button -->
+            <div class="w-1/4 flex justify-end">
+                <button 
+                    onclick="window.print()"
+                    class="bg-ave-teal text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-ave-teal-dark transition-all">
+                    Download as PDF
+                </button>
+            </div>
         </div>
     </div>
 
@@ -274,6 +305,25 @@
     <!-- Chart.js Initialization -->
     <script>
         window.onload = function() {
+            // Check if Chart object exists, if not, wait for it.
+            if (typeof Chart === 'undefined') {
+                setTimeout(initCharts, 100); // Wait 100ms and try again
+                return;
+            }
+            initCharts();
+        };
+
+        function initCharts() {
+             // Ensure Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js failed to load.');
+                return;
+            }
+            
+            // Register Chart.js components - REMOVED faulty line
+            // Chart.register(...Chart.controllers, ...Chart.elements, ...Chart.scales, ...Chart.plugins);
+            // The full build from CDN auto-registers standard components.
+
             const chartColors = {
                 teal: '#0d9488',
                 orange: '#f97316',
@@ -312,6 +362,8 @@
                         }
                     }
                 });
+            } else {
+                console.log('pipelineChart canvas not found');
             }
 
             // --- Income Chart ---
@@ -345,6 +397,8 @@
                         }
                     }
                 });
+            } else {
+                console.log('incomeChart canvas not found');
             }
 
             // --- Client Order Chart ---
@@ -391,10 +445,18 @@
                         }
                     }
                 });
+            } else {
+                console.log('clientOrderChart canvas not found');
             }
         };
     </script>
 
 </body>
 </html>
+
+
+
+
+
+
 

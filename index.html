@@ -91,21 +91,21 @@
                 </div>
             </div>
 
-            <!-- Card 2: Performance vs. Forecast (2/3 Width) -->
-            <div class="lg:col-span-2 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Performance vs. Forecast</h3>
-                <div class="flex justify-between items-end h-56 px-4 pt-4 relative">
-                    <!-- Y-Axis Labels (Simplified) -->
-                    <div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-gray-400 py-4" style="margin-bottom: 2.75rem;">
-                        <span>250k</span>
-                        <span>200k</span>
-                        <span>150k</span>
-                        <span>100k</span>
-                        <span>50k</span>
-                        <span>0k</span>
-                    </div>
-                    <!-- Chart Bars -->
-                    <div class="flex justify-around items-end h-full w-full pl-8 border-b border-l border-gray-300">
+            <!-- Card 2 & 8 Wrapper -->
+            <div class="lg:col-span-2 flex flex-col gap-6">
+
+                <!-- Card 2: Performance vs. Forecast (2/3 Width) -->
+                <div class="bg-white text-gray-800 rounded-lg shadow-lg p-6">
+                    <h3 class="text-ave-orange text-lg font-bold mb-4">Performance vs. Forecast</h3>
+                    <div class="flex justify-between items-end h-28 px-4 pt-2 relative">
+                        <!-- Y-Axis Labels (Simplified) -->
+                        <div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-gray-400 py-2" style="margin-bottom: 2.75rem;">
+                            <span>200k</span>
+                            <span>100k</span>
+                            <span>0k</span>
+                        </div>
+                        <!-- Chart Bars -->
+                        <div class="flex justify-around items-end h-full w-full pl-8 border-b border-l border-gray-300">
                         <!-- Group 1: Revenue -->
                         <div class="flex items-end mx-2" style="height: 100%;">
                             <div class="w-10 bg-ave-teal" style="height: 86.9%;" title="Actual: £199k"></div> <!-- 199/229 (max) -> ~87% -->
@@ -124,18 +124,33 @@
                         </div>
                     </div>
                 </div>
-                <!-- Legend -->
-                <div class="flex justify-center mt-4 space-x-6">
-                    <div class="chart-legend-item">
-                        <div class="chart-legend-dot bg-ave-teal"></div>
-                        <span>Actual</span>
+
+                <!-- Card 8: Food & Nutrition (Full Width) -->
+                <div class="bg-white text-gray-800 rounded-lg shadow-lg p-6">
+                    <h3 class="text-ave-orange text-lg font-bold mb-4">Food & Nutrition (Autumn/Winter Cycle)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Pod 1 -->
+                        <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
+                            <p class="text-5xl font-extrabold">169</p>
+                            <p class="text-sm font-medium">Total Requests</p>
+                        </div>
+                        <!-- Pod 2 -->
+                        <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
+                            <p class="text-5xl font-extrabold">46</p>
+                            <p class="text-sm font-medium">Completed</p>
+                        </div>
+                        <!-- Pod 3 -->
+                        <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
+                            <p class="text-5xl font-extrabold">90%</p>
+                            <p class="text-sm font-medium">Within 10 Days</p>
+                        </div>
                     </div>
-                    <div class="chart-legend-item">
-                        <div class="chart-legend-dot bg-gray-300"></div>
-                        <span>Forecast</span>
-                    </div>
+                    <p class="text-xs text-gray-500 italic mt-4">
+                        Bespoke menu requests now in Halo CRM. Increased data accuracy expected soon.
+                    </p>
                 </div>
-            </div>
+
+            </div> <!-- End Card 2 & 8 Wrapper -->
 
             <!-- Card 3: Business Development (1/3 Width) -->
             <div class="lg:col-span-1 bg-white text-gray-800 rounded-lg shadow-lg p-6">
@@ -306,35 +321,13 @@
             </div>
 
             <!-- Card 8: Food & Nutrition (Full Width) -->
-            <div class="lg:col-span-3 bg-white text-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-ave-orange text-lg font-bold mb-4">Food & Nutrition (Autumn/Winter Cycle)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Pod 1 -->
-                    <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
-                        <p class="text-5xl font-extrabold">169</p>
-                        <p class="text-sm font-medium">Total Requests</p>
-                    </div>
-                    <!-- Pod 2 -->
-                    <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
-                        <p class="text-5xl font-extrabold">46</p>
-                        <p class="text-sm font-medium">Completed</p>
-                    </div>
-                    <!-- Pod 3 -->
-                    <div class="bg-ave-orange/20 rounded-lg p-4 text-center text-orange-900">
-                        <p class="text-5xl font-extrabold">90%</p>
-                        <p class="text-sm font-medium">Within 10 Days</p>
-                    </div>
-                </div>
-                <p class="text-xs text-gray-500 italic mt-4">
-                    Bespoke menu requests now in Halo CRM. Increased data accuracy expected soon.
-                </p>
-            </div>
-
+            
         </div> <!-- End of Grid -->
 
     </div> <!-- End of Container -->
 
 </body>
 </html>
+
 
 

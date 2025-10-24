@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVE - September 2025 Board Report</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font (Tailwind default) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Lucide icons -->
+    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide.js"></script>
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-teal': '#007B80',
+                        'brand-orange': '#F7A721',
+                        'brand-dark-grey': '#4A4A4A',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom style for lucide icons */
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-brand-dark-grey">Added Value Enterprises Ltd.</h1>
+            <p class="text-lg text-slate-600">Executive Dashboard &mdash; As of 30 September 2025</p>
+        </header>
+
+        <!-- Top-Line KPIs -->
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+            
+            <!-- Total Revenue Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg flex items-start justify-between">
+                <div>
+                    <span class="text-sm font-medium text-slate-500 uppercase tracking-wider">Revenue (Sept)</span>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">£199k</p>
+                    <span class="text-sm text-red-600 flex items-center mt-2">
+                        <i data-lucide="trending-down" class="w-4 h-4 mr-1"></i>
+                        <span>Forecast: £229k</span>
+                    </span>
+                </div>
+                <div class="bg-brand-teal/10 text-brand-teal p-3 rounded-full">
+                    <i data-lucide="pound-sterling" class="icon"></i>
+                </div>
+            </div>
+
+            <!-- Profit Margin Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg flex items-start justify-between">
+                <div>
+                    <span class="text-sm font-medium text-slate-500 uppercase tracking-wider">PBIT Margin (YTD)</span>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">25.5%</p>
+                    <span class="text-sm text-green-600 flex items-center mt-2">
+                         <i data-lucide="trending-up" class="w-4 h-4 mr-1"></i>
+                        <span>Beat Forecast</span>
+                    </span>
+                </div>
+                <div class="bg-brand-teal/10 text-brand-teal p-3 rounded-full">
+                    <i data-lucide="pie-chart" class="icon"></i>
+                </div>
+            </div>
+
+            <!-- Billable Utilization Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg flex items-start justify-between">
+                <div>
+                    <span class="text-sm font-medium text-slate-500 uppercase tracking-wider">Quotes Converted (YTD)</span>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">21</p>
+                    <span class="text-sm text-slate-500 flex items-center mt-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 mr-1"></i>
+                        <span>Total YTD</span>
+                    </span>
+                </div>
+                <div class="bg-brand-orange/10 text-brand-orange p-3 rounded-full">
+                    <i data-lucide="file-check" class="icon"></i>
+                </div>
+            </div>
+
+            <!-- New Customers Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg flex items-start justify-between">
+                <div>
+                    <span class="text-sm font-medium text-slate-500 uppercase tracking-wider">Procurement Savings (Sept)</span>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">£188k</p>
+                    <span class="text-sm text-green-600 flex items-center mt-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 mr-1"></i>
+                        <span>Mitigated Value</span>
+                    </span>
+                </div>
+                <div class="bg-brand-teal/10 text-brand-teal p-3 rounded-full">
+                    <i data-lucide="receipt" class="icon"></i>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Column 1: Financials & Sales -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Financial Health Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-brand-dark-grey mb-4">💰 Commercial Performance</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="mb-4">
+                            <span class="text-sm font-medium text-slate-500">Year-End Performance (YTD)</span>
+                            <div class="flex space-x-8 mt-2">
+                                <div>
+                                    <span class="text-base font-medium text-brand-teal">YTD Revenue</span>
+                                    <p class="text-3xl font-bold text-slate-800">£2.22m</p>
+                                </div>
+                                <div>
+                                    <span class="text-base font-medium text-brand-teal">YTD PBIT</span>
+                                    <p class="text-3xl font-bold text-slate-800">£568k</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full h-48">
+                            <canvas id="commercialChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales & Growth Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-brand-dark-grey mb-4">📈 Business Development</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Pipeline Value -->
+                        <div class="space-y-3 col-span-1 md:col-span-1 border-r border-slate-200 pr-4">
+                            <div>
+                                <span class="text-sm font-medium text-slate-500 uppercase">Total Pipeline Value</span>
+                                <p class="text-3xl font-bold text-brand-teal">£19m</p>
+                                <span class="text-sm text-slate-500">(83 Opportunities)</span>
+                            </div>
+                            <div class="pt-4 border-t">
+                                <span class="text-sm font-medium text-slate-500">Weighted Pipeline (20%)</span>
+                                <p class="text-xl font-bold text-slate-800">£236k</p>
+                            </div>
+                            <div>
+                                <span class="text-sm font-medium text-slate-500">Avg. Income per Opp.</span>
+                                <p class="text-xl font-bold text-slate-800">£14.2k</p>
+                            </div>
+                        </div>
+                        <!-- Pipeline Stages -->
+                        <div class="col-span-1 md:col-span-2 pl-4">
+                            <span class="text-sm font-medium text-slate-500">Sector Focus (% of Pipeline Value)</span>
+                            <div class="w-full h-48 flex justify-center items-center">
+                                <canvas id="sectorChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Column 2: Operations & Customer -->
+            <div class="lg:col-span-1 space-y-6">
+
+                <!-- Operations & Delivery Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-brand-dark-grey mb-4">⚙️ Operations & Client Services</h2>
+                    
+                    <div class="mb-4">
+                        <span class="text-sm font-medium text-slate-500">Ticketing SLA Compliance (3-Day Response)</span>
+                        <div class="space-y-2 mt-2">
+                            <div class="text-center my-4">
+                                <p class="text-5xl font-bold text-brand-teal">97.02%</p>
+                                <span class="text-lg font-medium text-slate-700">Overall Compliance</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-4 border-t">
+                                <span class="text-slate-700">Total Tickets</span>
+                                <span class="text-lg font-bold text-slate-800">939</span>
+                            </div>
+                             <div class="flex justify-between items-center">
+                                <span class="text-slate-700">Non-Compliant Tickets</span>
+                                <span class="text-lg font-bold text-red-600">28</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-slate-200 pt-4">
+                        <span class="text-sm font-medium text-slate-500">Key Client Compliance (%)</span>
+                        <div class="w-full h-36 mt-2">
+                            <canvas id="complianceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Health Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-brand-dark-grey mb-4">🥙 Food & Nutrition Service</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-sm font-medium text-slate-500 uppercase">Bespoke Menu Performance (Autumn/Winter)</span>
+                        </div>
+                         <div class="flex justify-between items-baseline">
+                            <span class="font-medium text-slate-600">Validated Requests</span>
+                            <span class="text-xl font-bold text-slate-800">51</span>
+                        </div>
+                         <div class="flex justify-between items-baseline">
+                            <span class="font-medium text-slate-600">Completed Menus</span>
+                            <span class="text-xl font-bold text-slate-800">46</span>
+                        </div>
+                        <div class="border-t pt-4 space-y-4">
+                            <div classs="flex justify-between items-baseline">
+                                <span class="font-medium text-slate-600">Completed within 10 Days</span>
+                                <span class="text-2xl font-bold text-brand-teal ml-2">90%</span>
+                            </div>
+                            <div class="flex justify-between items-baseline">
+                                <span class="font-medium text-slate-600">Avg. Turnaround</span>
+                                <span class="text-2xl font-bold text-slate-800">7 days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div> <!-- /Main Dashboard Grid -->
+        
+    </div> <!-- /Container -->
+
+    <!-- Script to replace data-lucide icons -->
+    <script>
+        // Chart.js implementations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create icons first
+            lucide.createIcons();
+
+            // Chart.js config
+            const brandTeal = '#007B80';
+            const brandOrange = '#F7A721';
+            const slateGray = '#64748b'; // for forecast
+
+            // 1. Commercial Performance Chart
+            const ctxCommercial = document.getElementById('commercialChart');
+            if (ctxCommercial) {
+                new Chart(ctxCommercial.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Revenue (Sept)', 'PBIT (Sept)'],
+                        datasets: [
+                            {
+                                label: 'Actual',
+                                data: [199, 109], // Data from report (in 'k')
+                                backgroundColor: brandTeal,
+                                borderColor: brandTeal,
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Forecast',
+                                data: [229, 116], // Data from report (in 'k')
+                                backgroundColor: slateGray,
+                                borderColor: slateGray,
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'September Performance vs. Forecast (in £k)'
+                            },
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    boxWidth: 12
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '£' + value + 'k';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Sector Focus Chart
+            const ctxSector = document.getElementById('sectorChart');
+            if (ctxSector) {
+                new Chart(ctxSector.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Hospitality', 'Healthcare', 'Education'],
+                        datasets: [{
+                            label: '% of Pipeline',
+                            data: [49, 43, 8],
+                            backgroundColor: [
+                                brandTeal,
+                                brandOrange,
+                                slateGray
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    boxWidth: 12
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 3. Client Compliance Chart
+            const ctxCompliance = document.getElementById('complianceChart');
+            if (ctxCompliance) {
+                new Chart(ctxCompliance.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Aspens', 'Miquill', 'Stir Food', 'Palmer & H'],
+                        datasets: [{
+                            label: 'SLA Compliance %',
+                            data: [97.26, 94.55, 94.23, 100],
+                            backgroundColor: [
+                                brandTeal,
+                                brandTeal,
+                                brandTeal,
+                                brandOrange // Highlight the 100%
+                            ],
+                            borderColor: brandTeal,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', // Horizontal bar chart
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: false,
+                                min: 90, // Start axis at 90% to show variance
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body
+</html>
+
